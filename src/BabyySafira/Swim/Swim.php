@@ -23,7 +23,7 @@ class Swim extends PluginBase implements Listener {
 
     public function onDataPacketReceive(DataPacketReceiveEvent $event): void {
         $packet = $event->getPacket();
-        $player = $event->getPlayer();
+        $player = $event->getPlayerByPrefix();
 
         if ($packet instanceof PlayerActionPacket) {
             if ($packet->action === PlayerActionPacket::ACTION_START_SWIMMING) {
@@ -60,13 +60,13 @@ class Swim extends PluginBase implements Listener {
     }
 
     public function onPlayerRespawn(PlayerRespawnEvent $event): void {
-        $player = $event->getPlayer();
+        $player = $event->getPlayerByPrefix();
 
         $this->setSwimming($player, false);
     }
 
     public function onPlayerMove(PlayerMoveEvent $event): void {
-        $player = $event->getPlayer();
+        $player = $event->getPlayerByPrefix();
         $from = $event->getFrom();
         $to = $event->getTo();
 
